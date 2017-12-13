@@ -55,7 +55,3 @@ Every time `user` state is triggered to `advance` to another state, it will `go_
 
 	* Input: "go to state2"
 		* Reply: "I'm entering state2"
-
-
-## Author
-[Lee-W](https://github.com/Lee-W)
