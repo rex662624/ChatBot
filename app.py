@@ -8,42 +8,106 @@ from fsm import TocMachine
 
 
 API_TOKEN = '471395993:AAEgizhXCIKXbJuspQ6m1QP7lnmdSmo1kXA'
-WEBHOOK_URL = 'https://01146881.ngrok.io/hook'
+WEBHOOK_URL = 'https://87bdd1ae.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
 machine = TocMachine(
     states=[
-        'user',
-        'state1',
-        'state2'
+        'prestart',
+        'start',
+        'avengers',
+        'newmovie',
+        'Iron_man',
+        'thor',
+        'captain',
+        'movie1',
+        'trailer1'
     ],
     transitions=[
+        {#到Start
+            'trigger': 'advance',
+            'source': 'prestart',
+            'dest': 'start',
+            
+        },
+       ###########談論電影##################
+         
         {
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state1',
-            'conditions': 'is_going_to_state1'
+            'source': 'start',
+            'dest': 'avengers',
+            'conditions': 'go_to_avengers'
+        },
+        
+        {
+            'trigger': 'advance',
+            'source': 'avengers',
+            'dest': 'Iron_man',
+            'conditions': 'go_to_Iron_man'
         },
         {
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state2',
-            'conditions': 'is_going_to_state2'
+            'source': 'avengers',
+            'dest': 'captain',
+            'conditions': 'go_to_captain'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'avengers',
+            'dest': 'thor',
+            'conditions': 'go_to_thor'
         },
         {
             'trigger': 'go_back',
             'source': [
-                'state1',
-                'state2'
+		'thor',
+                'captain',
+                'Iron_man'
+                
             ],
-            'dest': 'user'
+            'dest': 'start'
+        },
+        #####最新電影####################
+        {
+            'trigger': 'advance',
+            'source': 'start',
+            'dest': 'newmovie',
+            'conditions': 'go_to_newmovie'
+        },
+        
+        {
+            'trigger': 'advance',
+            'source': 'newmovie',
+            'dest': 'movie1',
+            'conditions': 'go_to_movie1'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'movie1',
+            'dest': 'trailer1',
+            'conditions': 'gotrailer1'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'movie1',
+            'dest': 'start',
+            'conditions': 'movie_no'
+        },
+        {
+            'trigger': 'go_back',
+            'source':'trailer1',
+            'dest': 'start'
         }
+        
+        
     ],
-    initial='user',
+    initial='prestart',
     auto_transitions=False,
     show_conditions=True,
 )
+
+    
 
 
 def _set_webhook():
