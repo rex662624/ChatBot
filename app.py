@@ -8,7 +8,7 @@ from fsm import TocMachine
 
 
 API_TOKEN = '471395993:AAEgizhXCIKXbJuspQ6m1QP7lnmdSmo1kXA'
-WEBHOOK_URL = 'https://87bdd1ae.ngrok.io/hook'
+WEBHOOK_URL = 'https://5ec6c5cc.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
@@ -22,7 +22,9 @@ machine = TocMachine(
         'thor',
         'captain',
         'movie1',
-        'trailer1'
+        'trailer1',
+        'lottery',
+        'lottery_again'
     ],
     transitions=[
         {#到Start
@@ -32,6 +34,7 @@ machine = TocMachine(
             
         },
        ###########談論電影##################
+        
          
         {
             'trigger': 'advance',
@@ -65,6 +68,7 @@ machine = TocMachine(
                 'captain',
                 'Iron_man'
                 
+                
             ],
             'dest': 'start'
         },
@@ -94,12 +98,41 @@ machine = TocMachine(
             'dest': 'start',
             'conditions': 'movie_no'
         },
+        
         {
             'trigger': 'go_back',
             'source':'trailer1',
             'dest': 'start'
-        }
+        },
+
+        #######電影樂透#######
+           
+        {
+            'trigger': 'advance',
+            'source': 'start',
+            'dest': 'lottery',
+            'conditions': 'go_to_lottery'
+        },
+        #因為不能source dest都相同 只好讓他前進再無條件回去
+        {
+            'trigger': 'advance',
+            'source': 'lottery',
+            'dest': 'lottery_again',
+            'conditions': 'lotrery_again'
+        },
+        {
+            'trigger': 'go_back',
+            'source': 'lottery_again',
+            'dest': 'lottery',
+        },
         
+        {
+            'trigger': 'advance',
+            'source': 'lottery',
+            'dest': 'start',
+            'conditions': 'lottery_exit'
+        }
+       
         
     ],
     initial='prestart',

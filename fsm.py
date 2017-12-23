@@ -5,12 +5,14 @@ from bs4 import BeautifulSoup
 import sys
 import shutil
 
+import random
+
 movie = "現正熱映:\n\n" #存放電影清單(global)
 picture = [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 trailer = [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 judge = 0;      #不要重複爬蟲
 string = " "#輸入進找trailer的
-#target = " " #找到預告片的網址
+index = -1 #目前電影的編號
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -20,7 +22,29 @@ class TocMachine(GraphMachine):
         )
 
     def on_enter_start(self, update): #一開始start 的輸出文字
-            update.message.reply_text("Hi ,I'm a Movie bot\n\nYou can ask me about the newest moive.\n\nOr You want to talk about my favorite movie \"Marvel's The Avengers\"\n")
+            update.message.reply_text("Hi ,I'm a Movie bot\n\n1. You can ask me about the newest moive.\n\n2.You can get a movie by lottery.\n\n3.Or you  talk about my favorite movie \"Marvel's The Avengers\"\n")
+###電影樂透############################################
+    def go_to_lottery(self, update):#進樂透機
+        text = update.message.text
+        return text.lower() == 'lottery'
+    def on_enter_lottery(self, update):#隨機推薦一個電影 從txt檔中
+        file = open("movie.txt","r")
+        i = random.randint(1,786)#總共有786個電影
+        for j in range(i-1):#從0~i-1是不要的
+            file.readline()
+        update.message.reply_text(file.readline())
+        
+    def lotrery_again(self, update):#再一次
+        text = update.message.text
+        return text.lower() == 'again'
+    
+    def on_enter_lottery_again(self, update):
+        self.go_back(update)
+    
+    def lottery_exit(self, update):#跳出樂透
+        text = update.message.text
+        return text.lower() == 'exit'
+    
         
 ###復仇者聯盟##########################################
     def go_to_avengers(self, update):#談論電影
@@ -88,6 +112,7 @@ class TocMachine(GraphMachine):
                     if j <8 :
                         global picture 
                         picture[j]= ("http://www.3d-movies.tw/"+html_page[i-3][174:-31])#圖片
+                        print(picture[j])
                     else:
                         global picture 
                         picture[j]= ("http://www.3d-movies.tw/"+html_page[i-3][174:-30])#圖片
@@ -99,10 +124,20 @@ class TocMachine(GraphMachine):
         
     def go_to_movie1(self, update):#最新電影
         text = update.message.text
-        return text.lower() == '1'
+        ret =((text.lower() == '1')|(text.lower() == '2')|(text.lower() == '3')|(text.lower() == '4')|\
+              (text.lower() == '5')|(text.lower() == '6')|(text.lower() == '7')|(text.lower() == '8')|\
+              (text.lower() == '9')|(text.lower() == '10')|(text.lower() == '11')|(text.lower() == '12')|\
+              (text.lower() == '13')|(text.lower() == '14')|(text.lower() == '15')|(text.lower() == '16'))
+               #如果是輸入1~16是合法 給圖片並問是否要看預告片
+        if ret==1 :
+            global index
+            index = int(text.lower())-1 #把input string 轉成int,-1才是真的index
+        
+        return ret
         
     def on_enter_movie1(self,update):#送出電影圖片
-        update.message.reply_photo(picture[0])
+        global index
+        update.message.reply_photo(picture[index])
         update.message.reply_text("Want to watch trailer ?")
         
     def movie_no(self, update):#不要看預告片 回到Start
@@ -111,15 +146,15 @@ class TocMachine(GraphMachine):
 
     def gotrailer1(self, update):#要看預告片
         text = update.message.text
-        
         return text.lower() == 'yes'
             
     
     def on_enter_trailer1(self,update):
         global string
-        string = trailer[0]
-        findtrailer()
+        global index
+        string = trailer[index]
         update.message.reply_text(findtrailer())
+        self.go_back(update)
 
         
 def findtrailer():
