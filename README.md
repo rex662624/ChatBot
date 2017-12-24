@@ -44,14 +44,14 @@ python3 app.py
 
 ## Bonus setup (注意事項)
 
-####網路爬蟲
+#### 網路爬蟲
 ```sh
 Python -m pip install BeautifulSoup4
 ```
 ```sh
 Python -m pip install requests 
 ```
-####用來動態獲取ngrok網址
+#### 用來動態獲取ngrok網址
 
 需要curl指令，exe放在D/curl 資料夾中(自己新建一個curl資料夾)
 
