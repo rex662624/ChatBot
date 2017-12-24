@@ -1,8 +1,6 @@
-# TOC Project 2017
+# Movie Chat Bot 
 
-Template Code for TOC Project 2017
-
-A telegram bot based on a finite state machine
+describe
 
 ## Setup
 
@@ -43,6 +41,23 @@ python3 app.py
 
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
+
+## Bonus setup (注意事項)
+
+*網路爬蟲
+```sh
+Python -m pip install BeautifulSoup4
+```
+```sh
+Python -m pip install requests 
+```
+*用來動態獲取ngrok網址
+
+需要curl指令，exe放在D/curl 資料夾中(自己新建一個curl資料夾)
+
+curl下載網址:
+https://curl.haxx.se/download.html
+
 
 ## Usage
 The initial state is set to `user`.
