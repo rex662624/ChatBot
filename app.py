@@ -6,9 +6,26 @@ from flask import Flask, request, send_file
 
 from fsm import TocMachine
 
+#抓取ngork網址(curl要安裝在D:\curl)
+import json
+import os 
 
+os.system("D:\curl\curl  http://localhost:4040/api/tunnels > tunnels.json")
+
+with open('tunnels.json') as data_file:    
+    datajson = json.load(data_file)
+
+
+for i in datajson['tunnels']:
+  url =  i['public_url']
+  if url[4]=='s':
+      break;
+  
+#########################################
+    
 API_TOKEN = '471395993:AAEgizhXCIKXbJuspQ6m1QP7lnmdSmo1kXA'
-WEBHOOK_URL = 'https://5ec6c5cc.ngrok.io/hook'
+WEBHOOK_URL = url+'/hook'#這行設定URL 原來:'https://c82a342d.ngrok.io/hook'
+#WEBHOOK_URL = 'https://c82a342d.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
