@@ -24,8 +24,8 @@ for i in datajson['tunnels']:
 #########################################
     
 API_TOKEN = '471395993:AAEgizhXCIKXbJuspQ6m1QP7lnmdSmo1kXA'
-WEBHOOK_URL = url+'/hook'#這行設定URL 原來:'https://c82a342d.ngrok.io/hook'
-#WEBHOOK_URL = 'https://c82a342d.ngrok.io/hook'
+#WEBHOOK_URL = url+'/hook'#如果要用動態獲取請註解下行並取消註解這行(curl.exe需在:\curl\中)
+WEBHOOK_URL = 'https://c82a342d.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
