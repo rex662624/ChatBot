@@ -59,13 +59,25 @@ curl下載網址:
 https://curl.haxx.se/download.html
 
 ## Usage
-The initial state is set to `user`.
+一開始的 state為 `prestart`,chatbot會自動開始對話並到 `start`.共有3個對話分支.
+	* Input: "avengers" 
+		* Reply: "The Avengers is a Cool movie,which hero is your favorite?"
+		進入第一個對話分支
+	* Input: "lottery"  
+		* Reply:
+		進入第二個對話分支
+	* Input: "newmovie" 
+		* Reply:
+		進入第三個對話分支
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+* 第一個對話分支:
+	* Input: "iron man"
+		* Reply: "He is funny and cool."、並附上一段鋼鐵人的影片 
+		執行完後回到start
 
 	* Input: "go to state2"
 		* Reply: "I'm entering state2"
+
+* 第二個對話分支:
+
+* 第三個對話分支:
