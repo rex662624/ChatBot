@@ -60,15 +60,17 @@ https://curl.haxx.se/download.html
 
 ## Usage
 一開始的 state為 `prestart`,chatbot會自動開始對話並到 `start`.共有3個對話分支.
-	* Input: "avengers" 
-		* Reply: "The Avengers is a Cool movie,which hero is your favorite?"
-		進入第一個對話分支
-	* Input: "lottery"  
-		* Reply:
-		進入第二個對話分支
-	* Input: "newmovie" 
-		* Reply:
-		進入第三個對話分支
+* Input: "avengers" 
+	* Reply: "The Avengers is a Cool movie,which hero is your favorite?"
+	進入第一個對話分支
+		
+* Input: "lottery"  
+	* Reply:
+	進入第二個對話分支
+		
+* Input: "newmovie" 
+	* Reply:
+	進入第三個對話分支
 
 * 第一個對話分支:
 	* Input: "iron man"
