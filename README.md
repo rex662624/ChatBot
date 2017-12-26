@@ -42,7 +42,7 @@ python3 app.py
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
 
-## Bonus setup (注意事項)
+## Bonus setup (需額外安裝)
 
 #### 網路爬蟲
 ```sh
@@ -58,6 +58,7 @@ Python -m pip install requests
 curl下載網址:
 https://curl.haxx.se/download.html
 
+
 ## Usage
 * 一開始的 state為 `prestart`,chatbot會自動開始對話並到 `start`.共有3個對話分支.
 
@@ -66,21 +67,31 @@ https://curl.haxx.se/download.html
 		進入第一個對話分支
 		
 	* Input: "lottery"  
-		* Reply:
+		* Reply: 一部隨機推薦的電影
 		進入第二個對話分支
 		
 	* Input: "newmovie" 
 		* Reply:
 		進入第三個對話分支
 
-* 第一個對話分支:
+* 第一個對話分支:(state : avengers)
 	* Input: "iron man"
 		* Reply: "He is funny and cool."、並附上一段鋼鐵人的影片 
 		執行完後回到start
+		
+	* Input: "thor"
+		* Reply: "He is also my favorite hero."、並附上一段雷神索爾的影片 
+		執行完後回到start
+		
+	* Input: "captain"
+		* Reply: "He is strong and brave."、並附上一段美國隊長的影片 
+		執行完後回到start
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
-
-* 第二個對話分支:
-
+* 第二個對話分支:(state : lottery)
+	* Input: "again"
+		* Reply: 一部推薦的電影
+		執行完後回到自己，所以可以無限的打again產生推薦的電影
+		
+	* Input: "exit"
+	
 * 第三個對話分支:
