@@ -3,9 +3,9 @@
 ## Description
 * 一個以電影為主題的chatbot，共有三大對話分支，每項分支用到一種不同的技術。
 	* 透過curl動態獲取ngrok的Forwarding Url.(Curl安裝在D/curl資料夾內才有用)
-	* 第一個分支:與Bot討論它最喜歡的電影，復仇者聯盟--`傳送影片`
+	* 第一個分支:與Bot討論它最喜歡的電影，復仇者聯盟--傳送影片
 	* 第二個分支:電影樂透--Bot會讀取資料夾內movie.txt裡的data(目前有786部)，隨機抽一部電影推薦給使用者。
-	* 第三個分支:最新電影--Bot會爬蟲`http://www.3d-movies.tw/`首頁的電影傳送圖片給使用者，並爬蟲youtube找到預告片。
+	* 第三個分支:最新電影--Bot會爬蟲 http://www.3d-movies.tw/ 首頁的電影傳送圖片給使用者，並爬蟲youtube找到預告片。
 
 ## Setup
 
