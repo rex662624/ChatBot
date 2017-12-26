@@ -1,6 +1,6 @@
 # Movie Chat Bot 
 
-describe
+
 
 ## Setup
 
@@ -64,37 +64,46 @@ https://curl.haxx.se/download.html
 
 	* Input: "avengers" 
 		* Reply: "The Avengers is a Cool movie,which hero is your favorite?"
-		進入第一個對話分支
+		* 進入第一個對話分支
 		
 	* Input: "lottery"  
 		* Reply: 一部隨機推薦的電影
-		進入第二個對話分支
+		* 進入第二個對話分支
 		
 	* Input: "newmovie" 
-		* Reply:
-		進入第三個對話分支
+		* Reply: 近期會上映和上映中的電影
+		* 進入第三個對話分支
 
 * 第一個對話分支:(state : avengers)
 	* Input: "iron man"
 		* Reply: "He is funny and cool."、並附上一段鋼鐵人的影片 
-		執行完後回到start
+		* 執行完後回到start
 		
 	* Input: "thor"
 		* Reply: "He is also my favorite hero."、並附上一段雷神索爾的影片 
-		執行完後回到start
+		* 執行完後回到start
 		
 	* Input: "captain"
 		* Reply: "He is strong and brave."、並附上一段美國隊長的影片 
-		執行完後回到start
+		* 執行完後回到start
 
 * 第二個對話分支:(state : lottery)
 	* Input: "again"
 		* Reply: 一部推薦的電影
-		
-		執行完後回到自己，所以可以無限的打again產生推薦的電影
+		* 執行完後回到自己，所以可以無限的打again產生推薦的電影
 		
 	* Input: "exit" 
-		若想離開lottery分支，輸入exit就會回到start
+		* 若想離開lottery分支，輸入exit就會回到start
 		
+
+* 第三個對話分支:(state : newmovie)
 	
-* 第三個對話分支:
+	* Input: 編號1~16的某個數字
+		* Reply: 那部電影的圖片、並問 "Want to watch trailer ?"
+		
+	* Input: "no"
+		* 回到start
+		
+	* Input: "yes"
+		* Reply: 那部電影的trailer(預告片)網址
+		* 執行完回到start
