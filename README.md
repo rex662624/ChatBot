@@ -90,8 +90,11 @@ https://curl.haxx.se/download.html
 * 第二個對話分支:(state : lottery)
 	* Input: "again"
 		* Reply: 一部推薦的電影
+		
 		執行完後回到自己，所以可以無限的打again產生推薦的電影
 		
-	* Input: "exit"
+	* Input: "exit" 
+		若想離開lottery分支，輸入exit就會回到start
+		
 	
 * 第三個對話分支:
